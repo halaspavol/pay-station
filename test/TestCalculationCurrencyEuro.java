@@ -43,16 +43,17 @@ public class TestCalculationCurrencyEuro {
 	@Test
 	public void shouldDisplay2MinFor5Cents() throws IllegalCoinException {
 		
-//		// Arrange
-//		int expectedParkingTime = 2;	// In minutes		
-//		int coinValue = 5;
-//		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
-//		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		// Arrange
+		int expectedParkingTime = 2;	// In minutes		
+		int coinValue = 5;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
 		
 		// Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
 		
 		// Assert
-
+		assertEquals("Should display 2 min for 5 coins", expectedParkingTime, ps.readDisplay());
 	}
 
 	
