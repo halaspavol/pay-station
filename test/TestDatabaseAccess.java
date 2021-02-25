@@ -70,6 +70,7 @@ public class TestDatabaseAccess {
 
 		try {
 			numInserted = dbPbuy.insertParkingBuy(tempPBuy);
+			tempPBuy.setId(numInserted);
 			latestId = dbPbuy.getLatestId();
 		} catch(Exception ex) { 
 			System.out.println("Error: " + ex.getMessage());
