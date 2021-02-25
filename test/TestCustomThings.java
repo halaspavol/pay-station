@@ -80,7 +80,7 @@ public class TestCustomThings {
 	}
 
 	/**
-	 * Entering 1 eur and 50 dkk should make the display report 46 minutes parking
+	 * Entering 1 eur and 1 dkk should make the display report 46 minutes parking
 	 * time.
 	 */
 	@Test
