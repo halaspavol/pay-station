@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import org.junit.*;
+
 import java.time.LocalDate;
 
 //import controllayer.ControlPayStation;
@@ -13,12 +14,11 @@ import java.time.LocalDate;
 
 import databaselayer.*;
 import modellayer.*;
-import controllayer.*;
 
 //import static org.junit.Assert.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -53,7 +53,6 @@ public class TestDatabaseAccess {
 		// Arrange
 		LocalDate timeNow = java.time.LocalDate.now();
 		double payedCentAmount = 100;
-		
 		tempPBuy = new PBuy();
 		
 		PPayStation pStat = new PPayStation(1, "P-423E");
@@ -62,44 +61,48 @@ public class TestDatabaseAccess {
 		tempPBuy.setBuyTime(timeNow);
 		
 		DatabasePBuy dbPbuy = new DatabasePBuy();
+
 		
 		// Act
-		int key = 0; //TODO: Call dbPbuy
+		int numInserted = 0;
+		int latestId = 0;
+		
+
+		try {
+			numInserted = dbPbuy.insertParkingBuy(tempPBuy);
+			latestId = dbPbuy.getLatestId();
+		} catch(Exception ex) { 
+			System.out.println("Error: " + ex.getMessage());
+		} finally {
+			DBConnection.closeConnection();
+		}
+		
 		
 		// Assert
-		assertEquals("Dummy", key > 0);
-		
+		assertEquals("One row inserted", latestId, numInserted);
 	}	
 	
 	
 	@Test
 	public void wasRetrievedPriceDatabaselayer() {
 		// Arrange
-		PPrice foundPrice = null;
+		int foundPrice = 0;
 		int pZoneId = 2;
 		DatabasePPrice dbPrice = new DatabasePPrice();
-
+		
 		
 		// Act
+		try {
+			foundPrice = dbPrice.getPriceByZoneId(pZoneId);
+		} catch(Exception ex) { 
+			System.out.println("Error: " + ex.getMessage());
+		} finally {
+			DBConnection.closeConnection();
+		}
 
 		// Assert
-		assertEquals("Dummy", 0, 1);
-		
+		assertEquals("Retrived price", 25, foundPrice);
 	}
-	
-	
-	@Test
-	public void wasRetrievedPriceControllayer() {
-
-		// Arrange
-
-		
-		// Act
-
-		// Assert
-		assertEquals("Dummy", 0, 1);
-		
-	}	
 	
 	
 	/** Fixture for pay station testing. */

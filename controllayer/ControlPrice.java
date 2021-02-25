@@ -20,10 +20,10 @@ public class ControlPrice {
 		return currentPrice;
 	}
 	
-	public PPrice getPriceRemote(int zoneId) throws DatabaseLayerException {
+	public int getPriceRemote(int zoneId) throws DatabaseLayerException {
 		
 		// Get price from Parkingsystem DB
-		PPrice readPrice = dbPrice.getPriceByZoneId(zoneId);
+		int readPrice = dbPrice.getPriceByZoneId(zoneId);
 		//
 		return readPrice;
 	}

@@ -95,5 +95,27 @@ public class DatabasePBuy implements IDbPBuy {
 		
 		return numRowsDeleted;
 	}
-
+	
+	public int getLatestId() throws DatabaseLayerException {
+		int latestID = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String baseQuery = "SELECT TOP 1 PBuy.id FROM PBuy ORDER BY id DESC";
+		
+		try {
+			con = DBConnection.getInstance().getDBcon();
+			pstmt = con.prepareStatement(baseQuery);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {				
+				latestID = rs.getInt(1);
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return latestID;
+	}
 }

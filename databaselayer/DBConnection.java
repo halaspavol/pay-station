@@ -12,7 +12,7 @@ public class DBConnection {
     private static final String  databaseName = ";databaseName=PayStation";
     
     private static String  userName = "; user=sa";
-    private static String password = ";password=Vikpls62";
+    private static String password = ";password=Palinko30";
    
     private DatabaseMetaData dma;
     private static Connection con;
